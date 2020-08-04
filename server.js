@@ -12,6 +12,6 @@ app.use(express.static("public"));
 require("./routes/htmlRoutes")(app);
 require("./routes/apiRoutes")(app);
 
-app.listen(PORT, () => {
-  console.log("App listening on http://localhost:" + PORT);
+app.listen(PORT, function () {
+  console.log("App running on port " + PORT + "!");
 });

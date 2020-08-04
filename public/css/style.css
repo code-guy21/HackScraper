@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  border: 1px solid green;
+  padding: 29px;
+  background-color: black;
+  display: flex;
+}
+
+.title {
+  color: #5def44;
+  font-size: calc(20px + (32 - 20) * ((100vw - 300px) / (1600 - 300)));
+  font-family: "Press Start 2P", cursive;
+  text-align: center;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.nav-btn {
+  font-size: calc(6px + (17 - 6) * ((100vw - 300px) / (1600 - 300)));
+  font-family: "Press Start 2P", cursive;
+  margin-right: 30px;
+  width: 25%;
+  color: white;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.content {
+  border: 1px solid blue;
+}
+
+.footer {
+  border: 1px solid red;
+  text-align: center;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  font-size: 12px;
+  font-family: "Press Start 2P", cursive;
+}
+
+.nav-btn:hover {
+  color: #5def44;
+}
