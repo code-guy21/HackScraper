@@ -1,6 +1,8 @@
 $(document).ready(() => {
   $("#scrape").click(() => {
-    console.log("scrape");
+    $.get("/scrape").then((resp) => {
+      console.log(resp);
+    });
   });
 
   $("#clear").click(() => {
