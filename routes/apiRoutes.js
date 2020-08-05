@@ -28,4 +28,24 @@ module.exports = (app) => {
       res.send("Scrape Complete");
     });
   });
+
+  app.get("/articles", (req, res) => {
+    db.Article.find({})
+      .then((resp) => {
+        res.json(resp);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
+
+  app.delete("/clear", (req, res) => {
+    db.Article.remove({})
+      .then((resp) => {
+        res.json(resp);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
 };

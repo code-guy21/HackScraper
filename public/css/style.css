@@ -3,13 +3,12 @@
 }
 
 body {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .header {
-  border: 1px solid green;
   padding: 29px;
   background-color: black;
   display: flex;
@@ -41,11 +40,10 @@ body {
 }
 
 .content {
-  border: 1px solid blue;
+  overflow: scroll;
 }
 
 .footer {
-  border: 1px solid red;
   text-align: center;
   padding: 10px;
   background-color: black;
@@ -56,4 +54,40 @@ body {
 
 .nav-btn:hover {
   color: #5def44;
+}
+
+.article {
+  padding: 5px;
+  text-align: center;
+  margin: 10px;
+  border-radius: 10px;
+  font-family: "Press Start 2P", cursive;
+  display: flex;
+  flex-direction: column;
+  background-color: #04040417;
+}
+
+.headline {
+  padding: 20px;
+  font-size: 15px;
+}
+
+.link {
+  padding: 8px;
+  font-size: 12px;
+  background-color: #5def44;
+  width: 7%;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+#articles {
+  width: 60%;
+  margin: 0 auto;
 }

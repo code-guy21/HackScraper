@@ -10,6 +10,7 @@ let ArticleSchema = new Schema({
   link: {
     type: String,
     required: true,
+    unique: true,
   },
   note: {
     type: Schema.Types.ObjectId,
