@@ -12,6 +12,10 @@ let ArticleSchema = new Schema({
     required: true,
     unique: true,
   },
+  body: {
+    type: String,
+    required: true,
+  },
   saved: {
     type: Boolean,
     default: false,

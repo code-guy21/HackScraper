@@ -80,6 +80,10 @@ body {
   font-size: calc(9px + (15 - 9) * ((100vw - 300px) / (1600 - 300)));
 }
 
+.summary {
+  font-size: calc(5px + (10 - 5) * ((100vw - 300px) / (1600 - 300)));
+}
+
 .link {
   padding: 6px;
   font-size: calc(15px + (23 - 15) * ((100vw - 300px) / (1600 - 300)));

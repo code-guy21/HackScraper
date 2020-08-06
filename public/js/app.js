@@ -30,6 +30,7 @@ $(document).ready(() => {
   function render(article, saved) {
     let el = $("<article>").addClass("article");
     el.append(`<p class="headline">${article.title}</p>`);
+    el.append(`<p class="summary">${article.body}</p>`);
 
     let links = $("<div>").addClass("links");
 
@@ -42,7 +43,7 @@ $(document).ready(() => {
       );
     } else {
       links.append(
-        `<a class="link save" data-id="${article._id}"><i class="far fa-edit"></i></a>`
+        `<a class="link note" data-id="${article._id}"><i class="far fa-edit"></i></a>`
       );
     }
 

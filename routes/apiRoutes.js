@@ -2,30 +2,49 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 const db = require("../models");
+const { request } = require("express");
 
 module.exports = (app) => {
   app.get("/scrape", (req, res) => {
     axios.get("https://hackernoon.com/").then((resp) => {
       let $ = cheerio.load(resp.data);
+      let results = [];
+      let requests = [];
 
       $("article h2").each(function (i, element) {
-        let result = {};
-
-        result.title = $(this).children("a").text();
-        result.link = `https://hackernoon.com/${$(this)
+        let obj = {};
+        obj.title = $(this).children("a").text();
+        obj.link = `https://hackernoon.com/${$(this)
           .children("a")
           .attr("href")}`;
-
-        db.Article.create(result)
-          .then(function (dbArticle) {
-            console.log(dbArticle);
-          })
-          .catch(function (err) {
-            console.log(err);
-          });
+        results.push(obj);
+        requests.push(axios.get(obj.link));
       });
 
-      res.send("Scrape Complete");
+      axios.all(requests).then(
+        axios.spread((...responses) => {
+          responses.forEach((article, i) => {
+            let $ = cheerio.load(article.data);
+
+            results[i].body =
+              $("div > .paragraph")
+                .first()
+                .text()
+                .split(" ")
+                .slice(0, 10)
+                .join(" ") + "...";
+          });
+
+          db.Article.insertMany(results)
+            .then(function () {
+              console.log("complete");
+              res.send("Scrape Complete");
+            })
+            .catch(function (err) {
+              console.log(err);
+            });
+        })
+      );
     });
   });
 
