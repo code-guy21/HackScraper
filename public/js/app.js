@@ -14,7 +14,7 @@ $(document).ready(() => {
   function loadAll() {
     Object.values(state).forEach((article) => {
       if (!article.saved) {
-        render(article);
+        render(article, false);
       }
     });
   }
@@ -22,12 +22,12 @@ $(document).ready(() => {
   function loadSaved() {
     Object.values(state).forEach((article) => {
       if (article.saved) {
-        render(article);
+        render(article, true);
       }
     });
   }
 
-  function render(article) {
+  function render(article, saved) {
     let el = $("<article>").addClass("article");
     el.append(`<p class="headline">${article.title}</p>`);
 
@@ -36,9 +36,15 @@ $(document).ready(() => {
     links.append(
       `<a href="${article.link}" class="link"><i class="far fa-external-link"></i></a>`
     );
-    links.append(
-      `<a class="link save" data-id="${article._id}"><i class="far fa-save"></i></a>`
-    );
+    if (!saved) {
+      links.append(
+        `<a class="link save" data-id="${article._id}"><i class="far fa-save"></i></a>`
+      );
+    } else {
+      links.append(
+        `<a class="link save" data-id="${article._id}"><i class="far fa-edit"></i></a>`
+      );
+    }
 
     el.append(links);
 
@@ -70,7 +76,7 @@ $(document).ready(() => {
   $("#saved").click(function () {
     $("#articles").empty();
     if ($(this).attr("state") === "all") {
-      $("#saved").text("all");
+      $("#saved").text("articles");
       $("#saved").attr("state", "saved");
       loadSaved();
     } else {
