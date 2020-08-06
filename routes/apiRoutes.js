@@ -48,4 +48,18 @@ module.exports = (app) => {
         res.json(err);
       });
   });
+
+  app.put("/save/:id", (req, res) => {
+    db.Article.findOneAndUpdate(
+      { _id: req.params.id },
+      { saved: true },
+      { new: true }
+    )
+      .then((resp) => {
+        res.json(resp);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
 };
