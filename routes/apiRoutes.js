@@ -48,7 +48,7 @@ module.exports = (app) => {
     });
   });
 
-  app.get("/articles", (req, res) => {
+  app.get("/api/articles", (req, res) => {
     db.Article.find({})
       .then((resp) => {
         res.json(resp);
@@ -58,7 +58,7 @@ module.exports = (app) => {
       });
   });
 
-  app.delete("/clear", (req, res) => {
+  app.delete("/api/clear", (req, res) => {
     db.Article.remove({})
       .then((resp) => {
         res.json(resp);
@@ -68,7 +68,24 @@ module.exports = (app) => {
       });
   });
 
-  app.put("/save/:id", (req, res) => {
+  app.post("/api/note/:id", (req, res) => {
+    db.Note.create(req.body)
+      .then((dbNote) => {
+        return db.Article.findOneAndUpdate(
+          { _id: req.params.id },
+          { $push: { notes: dbNote._id } },
+          { new: true }
+        );
+      })
+      .then((dbArticle) => {
+        res.send(dbArticle);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
+
+  app.put("/api/article/save/:id", (req, res) => {
     db.Article.findOneAndUpdate(
       { _id: req.params.id },
       { saved: true },

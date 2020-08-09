@@ -2,7 +2,7 @@ let state = {};
 
 $(document).ready(() => {
   function fetchArticles() {
-    return $.get("/articles").then((resp) => {
+    return $.get("/api/articles").then((resp) => {
       resp.forEach((article) => {
         if (!state[article._id]) {
           state[article._id] = article;
@@ -66,7 +66,7 @@ $(document).ready(() => {
   $("#clear").click(() => {
     $.ajax({
       method: "DELETE",
-      url: "/clear",
+      url: "/api/clear",
     }).done((msg) => {
       console.log(msg);
       $("#articles").empty();
@@ -92,7 +92,7 @@ $(document).ready(() => {
 
     $.ajax({
       method: "PUT",
-      url: "/save/" + id,
+      url: "/api/article/save/" + id,
     }).done((resp) => {
       state[id] = { ...resp };
       $(this).closest(".article").remove();
