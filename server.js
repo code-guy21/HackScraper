@@ -12,7 +12,11 @@ app.use(express.static("public"));
 
 let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/hackscraper";
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+});
 
 require("./routes/htmlRoutes")(app);
 require("./routes/apiRoutes")(app);

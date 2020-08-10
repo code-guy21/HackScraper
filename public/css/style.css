@@ -28,16 +28,13 @@ body {
 
 .nav {
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  flex-direction: column;
 }
 
 .nav-btn {
-  font-size: calc(6px + (17 - 6) * ((100vw - 300px) / (1600 - 300)));
-  font-family: "Press Start 2P", cursive;
-  margin-right: 30px;
-  width: 25%;
   color: white;
+
+  font-family: "Press Start 2P", cursive;
 }
 
 .flex-1 {
@@ -46,13 +43,11 @@ body {
 
 .content {
   overflow: scroll;
-  margin-top: 85px;
 }
 
 .footer {
   text-align: center;
   padding: 20px;
-  background-color: #00000080;
   color: white;
   font-size: 12px;
   font-family: "Press Start 2P", cursive;

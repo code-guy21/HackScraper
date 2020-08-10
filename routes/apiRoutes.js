@@ -41,7 +41,7 @@ module.exports = (app) => {
               res.send("Scrape Complete");
             })
             .catch(function (err) {
-              console.log(err);
+              res.json(err);
             });
         })
       );
@@ -59,7 +59,7 @@ module.exports = (app) => {
   });
 
   app.delete("/api/clear", (req, res) => {
-    db.Article.remove({})
+    db.Article.deleteMany({})
       .then((resp) => {
         res.json(resp);
       })
@@ -71,14 +71,17 @@ module.exports = (app) => {
   app.post("/api/note/:id", (req, res) => {
     db.Note.create(req.body)
       .then((dbNote) => {
-        return db.Article.findOneAndUpdate(
+        db.Article.findOneAndUpdate(
           { _id: req.params.id },
           { $push: { notes: dbNote._id } },
           { new: true }
-        );
-      })
-      .then((dbArticle) => {
-        res.send(dbArticle);
+        )
+          .then(() => {
+            res.send(dbNote);
+          })
+          .catch((err) => {
+            res.json(err);
+          });
       })
       .catch((err) => {
         res.json(err);
@@ -93,6 +96,36 @@ module.exports = (app) => {
     )
       .then((resp) => {
         res.json(resp);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
+
+  app.get("/api/article/notes/:id", (req, res) => {
+    db.Article.findOne({ _id: req.params.id })
+      .populate("notes")
+      .then((dbArticle) => {
+        res.send(dbArticle.notes);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
+
+  app.delete("/api/note/delete/:noteId/:articleId", (req, res) => {
+    db.Note.deleteOne({ _id: req.params.noteId })
+      .then((dbNote) => {
+        db.Article.update(
+          { _id: req.params.articleId },
+          { $pull: { notes: req.params.noteId } }
+        )
+          .then((dbArticle) => {
+            res.send(dbArticle);
+          })
+          .catch((err) => {
+            res.json(err);
+          });
       })
       .catch((err) => {
         res.json(err);

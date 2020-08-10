@@ -3,15 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.js"
-      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
-    ></script>
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
+
     <script
       src="https://kit.fontawesome.com/97cf8ac576.js"
       crossorigin="anonymous"
@@ -21,27 +24,118 @@
       type="image/x-icon"
       href="../images/hacking.png"
     />
-    <link rel="stylesheet" href="../css/reset.css" />
+
     <link rel="stylesheet" href="../css/style.css" />
     <title>HackScraper</title>
   </head>
   <body>
-    <header class="header">
-      <div class="nav flex-1">
-        <a id="scrape" class="nav-btn">scrape</a>
-        <a id="clear" class="nav-btn">clear</a>
+    <div id="myModal" class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Notes</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="notes"></div>
+            <form id="noteForm" class="p-3 my-2 card">
+              <div class="form-group">
+                <label data-error="wrong" data-success="right" for="form32"
+                  >Title</label
+                >
+                <input
+                  type="text"
+                  id="noteTitle"
+                  class="form-control validate"
+                />
+              </div>
+              <div class="form-group">
+                <label data-error="wrong" data-success="right" for="form8"
+                  >Your message</label
+                >
+                <textarea
+                  type="text"
+                  id="noteMessage"
+                  class="md-textarea form-control"
+                  rows="4"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button id="addNote" type="button" class="btn btn-primary">
+              Add Note
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="title flex-1">HackScraper</div>
-      <div class="nav flex-1">
-        <a id="saved" class="nav-btn" state="all">saved</a>
+    </div>
+    <div class="pos-f-t">
+      <nav class="navbar navbar-dark bg-dark">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarToggleExternalContent"
+          aria-controls="navbarToggleExternalContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="title flex-1">HackScraper</div>
+      </nav>
+      <div class="collapse bg-dark" id="navbarToggleExternalContent">
+        <ul class="navbar-nav p-4">
+          <li class="nav-item">
+            <a id="scrape" class="nav-link nav-btn">scrape</a>
+          </li>
+          <li class="nav-item">
+            <a id="clear" class="nav-link nav-btn">clear</a>
+          </li>
+          <li class="nav-item">
+            <a id="saved" class="nav-link nav-btn" state="all">saved</a>
+          </li>
+        </ul>
       </div>
-    </header>
+    </div>
+
     <main class="content flex-1">
       <div id="articles"></div>
     </main>
-    <footer class="footer">
+    <footer class="footer bg-dark">
       Copyright &COPY; 2020
     </footer>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.js"
+      integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
     <script src="../js/app.js"></script>
   </body>
 </html>
